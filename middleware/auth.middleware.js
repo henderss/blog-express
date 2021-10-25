@@ -13,24 +13,12 @@ module.exports = async (req, res, next) => {
 			secretKey, 
 			{ 'complete': true }
 		)
-		const author = await Authors.findOne(
-			{ 
-				'where': { 
-					'email': email 
-				}
-			}
-		)
-		if (!author){
-			throw 'Invalid token'
-		}
 
 		return next()
 	} 
 
 	catch (error) {
 
-		if (!token) {
 			return res.status(401).send({ 'message': error.message })
-		}
 	}
 }
